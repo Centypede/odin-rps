@@ -1,8 +1,6 @@
 const playerWin = "Player wins!"
 const playerLose = "Computer wins!"
 const tie = "Tied! Redo!"
-
-
 let pWin = 0;
 let cWin = 0;
 
