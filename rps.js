@@ -1,8 +1,16 @@
+let cWin = 0;
+let pWin = 0;
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const result = document.querySelector("#result");
+const scoreboard = document.querySelector("#scoreboard");
+
+
 const playerWin = "Player wins!"
 const playerLose = "Computer wins!"
 const tie = "Tied! Redo!"
-let pWin = 0;
-let cWin = 0;
 
 function getComputerChoice () {
     let choice = Math.floor((Math.random() * 100) + 1)
@@ -19,6 +27,7 @@ function getComputerChoice () {
 
 function playRound(playerSelection, computerSelection) {
     console.log(playerSelection, computerSelection);
+
         if (playerSelection == "rock" ) {
             switch(computerSelection) {
                 case "rock":
@@ -59,22 +68,44 @@ function playRound(playerSelection, computerSelection) {
             }
             
         }
-
-        else {
-            return "Not a valid input! Try again."
-        }
-    return;
+        
 }
 
-while (pWin < 5 && cWin < 5) {
-    let playerSelection = prompt("Rock, paper, scissors:");
-    playerSelection = playerSelection.toLowerCase();
-    let computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
+function ScoreboardUpdate() {
     if (pWin == 5) {
-        console.log("You win!");
-    }
-    if (cWin == 5) {
-        console.log("You lose!");
+        alert("You win!")
+        scoreboard.textContent = "You won! Pick your throw to try again"
+        pWin = 0
+        cWin = 0
+    } else if (cWin == 5) {
+        alert("You lose!")
+        scoreboard.textContent = "You lost! Pick your throw to try again"
+        pWin = 0
+        cWin = 0
+    } else {
+    scoreboard.textContent = "Player:" + pWin + " CPU:" + cWin;
     }
 }
+
+rockButton.addEventListener("click", function (e) {
+    let computerSelection = getComputerChoice();
+    let playerSelection = "rock";
+    result.textContent = (playRound(playerSelection, computerSelection))
+    ScoreboardUpdate();
+})
+
+paperButton.addEventListener("click", function (e) {
+    let computerSelection = getComputerChoice();
+    let playerSelection = "paper";
+    result.textContent = (playRound(playerSelection, computerSelection))
+    ScoreboardUpdate();
+})
+
+scissorsButton.addEventListener("click", function (e) {
+    let computerSelection = getComputerChoice();
+    let playerSelection = 'scissors';
+    result.textContent = (playRound(playerSelection, computerSelection))
+    ScoreboardUpdate();
+})
+
+
